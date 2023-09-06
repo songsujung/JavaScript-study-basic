@@ -1,12 +1,11 @@
-const a = 5;
-const b = 2;
-let myName = "sujung";
+const amIFat = true;
+console.log(amIFat); // true
 
-console.log(a + b);
-console.log(a / b);
-console.log(a * b);
-console.log("hello " + myName);
+const amIFat2 = false;
+console.log(amIFat); // false
 
-myName = "SongSujung";
+const amIFat3 = null; // "값이 비어있다"고 값을 줌(defined)
+console.log(amIFat3); // null
 
-console.log("my new name is " + myName); 
+let something; // 값을 주지 않았음
+console.log(something); // undefined
