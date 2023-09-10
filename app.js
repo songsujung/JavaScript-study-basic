@@ -1,6 +1,14 @@
-// document로 html의 항목에 접근 및 수정 가능
-// html에서 Hello! From HTML!로 되어있는 title을 가져와 아래와 같이 수정(html과 js가 연결되어 있음을 확인)
-document.title = "Hello! From Js!";
+// html에 접근해 특정 항목를 가져와 Javascript에서 수정해보자.
 
-// html의 body도 가져와 보기
-document.body
+// html의 title이라는 id 요소를 가져와 title에 할당
+const title = document.getElementById("title");
+
+console.dir(title); // title object 안의 여러 요소들이 console에 표시됨
+
+// Javascript에서 innerText, className을 수정해보자.
+title.innerText = "Got you!";
+title.className = "Hello!!!!!!!";
+
+console.log(title.id); // title
+console.log(title.innerText); // Got you! ( Grab me!에서 Got you!로 변경됨)
+console.log(title.className); // Hello!!!!!!! ( Hello에서 Hello!!!!!!!로 변경됨)
