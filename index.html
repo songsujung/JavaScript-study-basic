@@ -7,8 +7,8 @@
     <title>Momentum App</title>
 </head>
 <body>
-    <!-- input은 form안에 있어야만 유효성검사가 가능 -->
-    <form id="login-form">
+    <!-- 저장된 userName 여부에 따라 form을 보여줄 지 greeting을 보여줄 지를 구현하기 위해 둘다 .hidden으로 숨기기 -->
+    <form id="login-form" class="hidden">
         <input 
             required 
             maxlength="15" 
@@ -17,7 +17,7 @@
         />
         <input type="submit" value="Login" />
     </form>
-    <h1 id="greeting"></h1>
+    <h1 id="greeting" class="hidden"></h1>
     <script src="app.js"></script>
 </body>
 </html>
