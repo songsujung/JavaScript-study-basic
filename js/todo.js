@@ -5,7 +5,9 @@ const toDoList = document.getElementById("todo-list");
 const TODOS_KEY = "todos"
 
 // newTodo가 그려질 때(paintTodo)마다 array에 push
-const toDos = [];
+// const toDos = []; // 사용자가 newTodo를 입력하게 되면 기존의 todo에 덮어 씌어져 사라지기 때문에 아래와 같이 처리
+// let으로 바꿔 업데이트가 가능한 빈배열로 시작하게 만든다.
+let toDos = [];
 
 // toDos array의 내용을 localStorage에 담기
 // localStorage에는 array가 array형식으로 저장되지 않는다. "a", "b", "c"이런식으로 저장됨
@@ -44,7 +46,9 @@ function handleToDoSubmit(event) {
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 // event처럼 item도 js에서 제공해줌 (어떤 아이템을 실행하고 있는지를 확인할 수 있다.)
-// 아래와 같이 =>(화살표함수)를 사용해서 같은 결과를 낼 수 있다.
+/* 아래와 같이 =>(화살표함수)를 사용해서 같은 결과를 낼 수 있다.
+   (item) => console.log("this is the turn of ", item) */
+
 // function sayHello(item) {
 //     console.log("this is the turn of", item);
 // }
@@ -53,8 +57,11 @@ toDoForm.addEventListener("submit", handleToDoSubmit);
 // JSON.parse : array로 변환
 const savedToDos = localStorage.getItem(TODOS_KEY);
 
-if(saveToDos !== null) {
+// 새로고침을 해도 입력했던 값들이 날아가지 않고, 화면에 찍혀있게 하자.
+if (savedToDos !== null) {
+    // saveToDos에 값이 있다면,
     const parsedToDos = JSON.parse(savedToDos);
+    toDos = parsedToDos; // toDos에 parsedToDos를 넣어서 이전의 toDo를 복원
     // forEach : array의 각 item에 대해서 function을 실행해준다.
-    parsedToDos.forEach((item) => console.log("this is the turn of ", item));
-}
+    parsedToDos.forEach(paintTodo); // 작성한 todo에 대해서 각각 paintTodo를 실행
+  }
