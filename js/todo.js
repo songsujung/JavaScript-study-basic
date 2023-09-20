@@ -2,6 +2,8 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.getElementById("todo-list");
 
+const TODOS_KEY = "todos"
+
 // newTodo가 그려질 때(paintTodo)마다 array에 push
 const toDos = [];
 
@@ -10,7 +12,7 @@ const toDos = [];
 // JSON.stringify로 array를 string타입으로 변환 후, localStorage에 string을 array의 모양으로 저장 ["a", "b", "c"]
 // JSON.stringify : array든 어떠한 js코드던 string으로 변환
 function saveToDos() {
-    localStorage.setItem("todos", JSON.stringify(toDos)); 
+    localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
 function deleteToDo(event) {
@@ -40,3 +42,19 @@ function handleToDoSubmit(event) {
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
+
+// event처럼 item도 js에서 제공해줌 (어떤 아이템을 실행하고 있는지를 확인할 수 있다.)
+// 아래와 같이 =>(화살표함수)를 사용해서 같은 결과를 낼 수 있다.
+// function sayHello(item) {
+//     console.log("this is the turn of", item);
+// }
+
+// localStorage에 담긴 array모양새의 string을 array로 변환
+// JSON.parse : array로 변환
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if(saveToDos !== null) {
+    const parsedToDos = JSON.parse(savedToDos);
+    // forEach : array의 각 item에 대해서 function을 실행해준다.
+    parsedToDos.forEach((item) => console.log("this is the turn of ", item));
+}
