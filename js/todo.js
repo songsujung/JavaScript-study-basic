@@ -70,4 +70,11 @@ if (savedToDos !== null) {
     toDos = parsedToDos; // toDos에 parsedToDos를 넣어서 이전의 toDo를 복원
     // forEach : array의 각 item에 대해서 function을 실행해준다.
     parsedToDos.forEach(paintTodo); // 작성한 todo에 대해서 각각 paintTodo를 실행
-  }
+}
+
+// 새 array에도 1,2,3,4를 포함하고 싶으면, 반드시 true를 리턴해야 한다.
+// return값이 true이면 array에 유지되고, fales가 나오면 array에서 삭제된다.
+// 예제)
+// const arr = [1, 2, 3, 4, 5]
+// function goodFilter(num) { return num < 3} // num값(arr)이 3미만이면 남아있고, 그렇지않으면 삭제
+// arr.filter(goodFilter); // [1, 2] 
