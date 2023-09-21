@@ -24,8 +24,9 @@ function deleteToDo(event) {
 
 function paintTodo(newTodo) {
     const li = document.createElement("li"); // li 생성
+    li.id = newTodo.id // li.id를 newTodo.id로 생성
     const span = document.createElement("span"); // span 생성
-    span.innerText = newTodo; // span의 텍스트를 변경(newTodo로 변경)
+    span.innerText = newTodo.text; // span의 텍스트를 변경(newTodo.text로 변경, text로 하지 않으면 [object, object]가 화면에 출력됨)
     const button = document.createElement("button"); // button 생성
     button.innerText = "❌"; // button의 텍스트를 변경 (X로 변경)
     button.addEventListener("click", deleteToDo); // delete button 클릭 이벤트
@@ -38,8 +39,13 @@ function handleToDoSubmit(event) {
     event.preventDefault(); // 기본동작 막기
     const newTodo = toDoInput.value; // input에 입력된 값을 newTodo에 할당(새로운 변수에 값을 저장)
     toDoInput.value = "" // 엔터를 누르면 값이 입력되었던 input란이 비워짐(newTodo가 비워지지 않음 무관)
-    toDos.push(newTodo); // toDos array를 가져와서 newTodo를 push
-    paintTodo(newTodo); // newTodo를 paintTodo에 넣어서 호출
+    // text만 받던 방식에서 text와 랜덤한id도 받는 방식으로 const 생성
+    const newTodoObj = {
+        text : newTodo,
+        id : Date.now() // li item을 각각 구별하기 위해 id 사용
+    }
+    toDos.push(newTodoObj); // toDos array를 가져와서 newTodoObj를 push
+    paintTodo(newTodoObj); // newTodoObj를 paintTodo에 넣어서 호출
     saveToDos(); // toDo 저장
 }
 
