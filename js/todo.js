@@ -17,9 +17,14 @@ function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
+// Filter함수 : 새 array에도 1,2,3,4를 포함하고 싶으면, 반드시 true를 리턴해야 한다.
+// return값이 true이면 array에 유지되고, fales가 나오면 array에서 삭제된다.
 function deleteToDo(event) {
     const li = event.target.parentElement; // 클릭된 element(button)의 부모Element(li)에 접근
     li.remove(); // li를 삭제
+    //console.log(typeof li.id); // li.id는 string타입, 아래와 같이 li.id를 int로 타입변경을 해주어야 정상적으로 실행됨(id가 숫자타입이기 때문에)
+    toDos = toDos.filter(toDo => toDo.id !== parseInt(li.id)) // 클릭했던 li의 id를 갖고 있는 toDo를 삭제
+    saveToDos(); // 삭제 후에는 반드시 저장
 }
 
 function paintTodo(newTodo) {
@@ -71,10 +76,3 @@ if (savedToDos !== null) {
     // forEach : array의 각 item에 대해서 function을 실행해준다.
     parsedToDos.forEach(paintTodo); // 작성한 todo에 대해서 각각 paintTodo를 실행
 }
-
-// 새 array에도 1,2,3,4를 포함하고 싶으면, 반드시 true를 리턴해야 한다.
-// return값이 true이면 array에 유지되고, fales가 나오면 array에서 삭제된다.
-// 예제)
-// const arr = [1, 2, 3, 4, 5]
-// function goodFilter(num) { return num < 3} // num값(arr)이 3미만이면 남아있고, 그렇지않으면 삭제
-// arr.filter(goodFilter); // [1, 2] 
